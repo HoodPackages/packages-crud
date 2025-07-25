@@ -68,6 +68,7 @@ export default function ProductManagerPage() {
             tags: pkg.tags || []
         });
         setEditId(pkg._id);
+        window.scroll(0, 0);
     };
 
 
