@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { PackageCard } from "../components/PackageCard";
 
 const API_URL = "http://localhost:5000/api/products";
 
@@ -246,75 +247,14 @@ export default function ProductManagerPage() {
                 )}
             </form>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
                 {packages.map(pkg => (
-                    <div key={pkg._id} className="bg-white rounded shadow p-4 flex space-x-4">
-                        {pkg.image && (
-                            <img
-                                src={pkg.image}
-                                alt={pkg.name}
-                                className="w-24 h-24 object-cover rounded"
-                            />
-                        )}
-                        <div className="flex-1">
-                            <h2 className="font-semibold text-lg">{pkg.name}</h2>
-                            <p className="text-gray-600 text-sm">{pkg.description}</p>
-                            <p className="mt-1 text-sm font-medium text-indigo-600">Тип: {pkg.type}</p>
-                            <p className="text-green-600 font-bold mt-1">Цена: {pkg.basePrice} грн</p>
-
-                            {pkg.printOptions?.length > 0 && (
-                                <div className="mt-2">
-                                    <h4 className="font-semibold text-sm">Опции печати:</h4>
-                                    <ul className="list-disc list-inside text-sm">
-                                        {pkg.printOptions.map((opt, i) => (
-                                            <li key={i}>{opt.code}: {opt.price} грн</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-
-                            {/* Оптовые цены */}
-                            {pkg.bulkPricing?.length > 0 && (
-                                <div className="mt-2">
-                                    <h4 className="font-semibold text-sm">Оптовое ценообразование:</h4>
-                                    <ul className="text-sm list-disc list-inside">
-                                        {pkg.bulkPricing.map((bp, idx) => (
-                                            <li key={idx}>от {bp.minQty} шт × {bp.priceMultiplier}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-
-                            {/* Теги */}
-                            {pkg.tags?.length > 0 && (
-                                <div className="mt-2">
-                                    <h4 className="font-semibold text-sm">Теги:</h4>
-                                    <p className="text-sm text-gray-700">{pkg.tags.join(", ")}</p>
-                                </div>
-                            )}
-
-                            {/* Дата создания */}
-                            <p className="text-xs text-gray-400 mt-1">
-                                Создано: {new Date(pkg.createdAt).toLocaleDateString()}
-                            </p>
-
-
-                            <div className="mt-3 space-x-2">
-                                <button
-                                    onClick={() => handleEdit(pkg)}
-                                    className="px-3 py-1 bg-yellow-400 rounded hover:bg-yellow-500 transition"
-                                >
-                                    Редактировать
-                                </button>
-                                <button
-                                    onClick={() => handleDelete(pkg._id)}
-                                    className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition"
-                                >
-                                    Удалить
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <PackageCard
+                        key={pkg._id}
+                        pkg={pkg}
+                        onEdit={handleEdit}
+                        onDelete={handleDelete}
+                    />
                 ))}
             </div>
         </div>
