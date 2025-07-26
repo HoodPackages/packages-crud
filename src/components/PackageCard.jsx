@@ -5,13 +5,15 @@ export function PackageCard({ pkg, onEdit, onDelete }) {
   const toShow = showAll ? pkg.printOptions : pkg.printOptions.slice(0, 3);
 
   return (
-    <div className="bg-white rounded-2xl shadow-md border border-gray-200 hover:shadow-lg transition-all duration-300 p-6 relative">
+    <div className="bg-white rounded-2xl shadow-md border border-gray-200 hover:shadow-lg transition-all duration-200 p-6 relative">
       {pkg.image && (
-        <img
-          src={pkg.image}
-          alt={pkg.name}
-          className="w-full h-40 object-cover rounded-lg mb-4"
-        />
+        <div className="w-full aspect-[4/5] bg-gray-100 rounded-lg overflow-hidden shadow-sm">
+          <img
+            src={pkg.image}
+            alt={pkg.name}
+            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+          />
+        </div>
       )}
       <div>
         <h2 className="font-bold text-xl text-gray-800 mb-1">{pkg.name}</h2>
