@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { PackageCard } from "../components/PackageCard";
+import FileDropzone from "../components/FileDropzone";
 
 const API_URL = "http://localhost:5000/api/products";
 
@@ -113,6 +114,8 @@ export default function ProductManagerPage() {
     return (
         <div className="max-w-4xl mx-auto p-6 bg-gray-50 min-h-screen">
             <h1 className="text-3xl font-bold mb-6 text-center">CRUD Пакетов</h1>
+
+            <FileDropzone />
 
             <form onSubmit={handleSubmit} className="mb-8 space-y-4 bg-white p-6 rounded shadow">
                 <input
