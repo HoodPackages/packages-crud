@@ -5,80 +5,91 @@ export function PackageCard({ pkg, onEdit, onDelete }) {
   const toShow = showAll ? pkg.printOptions : pkg.printOptions.slice(0, 3);
 
   return (
-    <div className="bg-white rounded-2xl shadow-md border border-gray-200 hover:shadow-lg transition-all duration-200 p-6 relative">
-      {pkg.images && (
-        <div className="w-full aspect-[4/5] bg-gray-100 rounded-lg overflow-hidden shadow-sm">
+    <div className="bg-white rounded-3xl shadow-lg border border-gray-200 hover:shadow-2xl transition-shadow duration-300 p-6 max-w-sm mx-auto">
+      {/* Изображение сверху */}
+      {pkg.images && pkg.images.length > 0 && (
+        <div className="w-full aspect-[4/5] rounded-xl overflow-hidden bg-gray-100 shadow-inner mb-4">
           <img
-            src={pkg.images}
+            src={pkg.images[0]}
             alt={pkg.name}
-            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+            className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105"
+            loading="lazy"
           />
         </div>
       )}
+
       <div>
-        <h2 className="font-bold text-xl text-gray-800 mb-1">{pkg.name}</h2>
-        <p className="text-gray-600 text-sm mb-2">{pkg.description}</p>
-        <p className="text-sm text-indigo-600 mb-1">Тип: <span className="font-semibold">{pkg.type}</span></p>
+        <h2 className="font-extrabold text-2xl text-gray-900 mb-2 truncate">{pkg.name}</h2>
+        <p className="text-gray-600 text-sm mb-4 line-clamp-3">{pkg.description}</p>
+
+        <p className="text-indigo-700 text-sm mb-3">
+          <span className="font-semibold">Тип:</span> {pkg.type}
+        </p>
+
         {pkg.price?.length > 0 && (
-          <div className="mb-3">
-            <h4 className="text-green-700 font-bold text-sm">Цены:</h4>
-            <ul className="text-sm text-gray-700 list-disc list-inside">
+          <div className="mb-4">
+            <h4 className="text-green-800 font-semibold text-sm mb-2 uppercase tracking-wide">
+              Цены по количеству
+            </h4>
+            <ul className="text-gray-700 text-sm space-y-1">
               {pkg.price.map((p, i) => (
-                <li key={i}>от {p.minQty} шт — {p.price} {pkg.currency}</li>
+                <li key={i} className="flex justify-between border-b border-gray-100 pb-1">
+                  <span>от {p.minQty} шт</span>
+                  <span className="font-semibold">{p.price} {pkg.currency}</span>
+                </li>
               ))}
             </ul>
           </div>
         )}
 
         {pkg.printOptions?.length > 0 && (
-          <div className="mb-2">
-            <h4 className="font-semibold text-sm mb-1">Опции печати:</h4>
-            <ul className="text-sm text-gray-700 list-disc list-inside space-y-1">
+          <div className="mb-4">
+            <h4 className="font-semibold text-sm mb-2 text-gray-800 uppercase tracking-wide">
+              Опции печати
+            </h4>
+            <ul className="text-gray-700 text-sm space-y-1 max-h-28 overflow-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300">
               {toShow.map((opt, i) => (
-                <li key={i}>{opt.code}: {opt.price} грн</li>
+                <li key={i} className="flex justify-between border-b border-gray-100 pb-1">
+                  <span>{opt.code}</span>
+                  <span className="font-medium">{opt.price} грн</span>
+                </li>
               ))}
             </ul>
             {pkg.printOptions.length > 3 && (
               <button
-                className="text-gray-500 text-sm mt-1 hover:text-gray-700 transition-colors duration-200 underline-offset-2 hover:underline"
+                className="mt-1 text-indigo-600 text-xs font-semibold hover:underline"
                 onClick={() => setShowAll(!showAll)}
+                aria-label={showAll ? "Скрыть все опции печати" : "Показать все опции печати"}
               >
-                {showAll ? "Скрыть" : "Ещё"}
+                {showAll ? "Скрыть" : "Показать ещё..."}
               </button>
             )}
           </div>
         )}
 
-        {pkg.bulkPricing?.length > 0 && (
-          <div className="mb-2">
-            <h4 className="font-semibold text-sm mb-1">Оптовое ценообразование:</h4>
-            <ul className="text-sm list-disc list-inside text-gray-700">
-              {pkg.bulkPricing.map((bp, idx) => (
-                <li key={idx}>от {bp.minQty} шт × {bp.priceMultiplier}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
         {pkg.tags?.length > 0 && (
-          <div className="mb-2">
-            <h4 className="font-semibold text-sm">Теги:</h4>
-            <p className="text-sm text-gray-700">{pkg.tags.join(", ")}</p>
+          <div className="mb-4">
+            <h4 className="text-gray-500 uppercase tracking-wide text-xs font-semibold mb-1">Теги</h4>
+            <p className="text-gray-600 text-sm">{pkg.tags.join(", ")}</p>
           </div>
         )}
 
-        <p className="text-xs text-gray-400 mt-1">Создано: {new Date(pkg.createdAt).toLocaleDateString()}</p>
+        <p className="text-xs text-gray-400 mb-4">
+          Создано: {new Date(pkg.createdAt).toLocaleDateString()}
+        </p>
 
-        <div className="mt-4 flex space-x-2">
+        <div className="flex justify-between space-x-4">
           <button
             onClick={() => onEdit(pkg)}
-            className="px-4 py-2 text-sm bg-yellow-400 text-gray-800 rounded hover:bg-yellow-500 transition"
+            className="flex-1 px-4 py-2 rounded-full bg-yellow-400 text-gray-900 font-semibold hover:bg-yellow-500 transition"
+            aria-label="Редактировать пакет"
           >
             Редактировать
           </button>
           <button
             onClick={() => onDelete(pkg._id)}
-            className="px-4 py-2 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition"
+            className="flex-1 px-4 py-2 rounded-full bg-red-600 text-white font-semibold hover:bg-red-700 transition"
+            aria-label="Удалить пакет"
           >
             Удалить
           </button>

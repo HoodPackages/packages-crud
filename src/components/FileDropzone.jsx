@@ -33,7 +33,7 @@ export default function FileDropzone() {
 
             setFileName(data.fileName || file.name); // если сервер возвращает имя
         } catch (err) {
-            setError("Помилка при завантаженні файлу");
+            setError("Ошибка при загрузке файла");
             console.error("Upload error:", err);
         } finally {
             setUploading(false);
@@ -58,14 +58,14 @@ export default function FileDropzone() {
             >
                 <input {...getInputProps()} />
                 {isDragActive ? (
-                    <p className="text-blue-500">Відпустіть файл сюди...</p>
+                    <p className="text-blue-500">Отпустите файл сюда...</p>
                 ) : (
-                    <p className="text-gray-500">Перетягніть Excel-файл сюди або натисніть, щоб вибрати</p>
+                    <p className="text-gray-500">Перетащите файл Excel сюда или нажмите, чтобы выбрать</p>
                 )}
             </div>
 
-            {uploading && <p className="mt-2 text-sm text-gray-600">Завантаження...</p>}
-            {fileName && <p className="mt-2 text-sm text-green-600">✅ Завантажено: {fileName}</p>}
+            {uploading && <p className="mt-2 text-sm text-gray-600">Загрузка...</p>}
+            {fileName && <p className="mt-2 text-sm text-green-600">✅ Загружено: {fileName}</p>}
             {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
         </div>
     );
