@@ -353,6 +353,14 @@ export default function ProductManagerPage() {
                                                 />
                                                 <input
                                                     className="input input-bordered flex-1"
+                                                    placeholder="Кол-во (например, 100)"
+                                                    value={opt.quantity}
+                                                    onChange={(e) =>
+                                                        handlePrintOptionChange(idx, "code", e.target.value)
+                                                    }
+                                                />
+                                                <input
+                                                    className="input input-bordered flex-1"
                                                     type="number"
                                                     min={0}
                                                     placeholder="Цена"

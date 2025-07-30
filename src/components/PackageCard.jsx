@@ -6,7 +6,6 @@ export function PackageCard({ pkg, onEdit, onDelete }) {
 
   return (
     <div className="bg-white rounded-3xl shadow-lg border border-gray-200 hover:shadow-2xl transition-shadow duration-300 p-6 max-w-sm mx-auto">
-      {/* Изображение сверху */}
       {pkg.images && pkg.images.length > 0 && (
         <div className="w-full aspect-[4/5] rounded-xl overflow-hidden bg-gray-100 shadow-inner mb-4">
           <img
@@ -50,7 +49,7 @@ export function PackageCard({ pkg, onEdit, onDelete }) {
             <ul className="text-gray-700 text-sm space-y-1 max-h-28 overflow-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300">
               {toShow.map((opt, i) => (
                 <li key={i} className="flex justify-between border-b border-gray-100 pb-1">
-                  <span>{opt.code}</span>
+                  <span>{opt.code}/{opt.quantity} шт</span>
                   <span className="font-medium">{opt.price} грн</span>
                 </li>
               ))}
