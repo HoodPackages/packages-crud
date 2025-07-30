@@ -6,10 +6,10 @@ export function PackageCard({ pkg, onEdit, onDelete }) {
 
   return (
     <div className="bg-white rounded-2xl shadow-md border border-gray-200 hover:shadow-lg transition-all duration-200 p-6 relative">
-      {pkg.image && (
+      {pkg.images && (
         <div className="w-full aspect-[4/5] bg-gray-100 rounded-lg overflow-hidden shadow-sm">
           <img
-            src={pkg.image}
+            src={pkg.images}
             alt={pkg.name}
             className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
           />
@@ -19,7 +19,7 @@ export function PackageCard({ pkg, onEdit, onDelete }) {
         <h2 className="font-bold text-xl text-gray-800 mb-1">{pkg.name}</h2>
         <p className="text-gray-600 text-sm mb-2">{pkg.description}</p>
         <p className="text-sm text-indigo-600 mb-1">Тип: <span className="font-semibold">{pkg.type}</span></p>
-        <p className="text-green-700 font-bold text-lg mb-3">Цена: {pkg.basePrice} грн</p>
+        <p className="text-green-700 font-bold text-lg mb-3">Цена: {pkg.price} грн</p>
 
         {pkg.printOptions?.length > 0 && (
           <div className="mb-2">
