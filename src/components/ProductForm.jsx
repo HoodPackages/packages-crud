@@ -8,218 +8,253 @@ export default function ProductForm({
     onCancel,
     onPrintOptionChange,
     onAddPrintOption,
-    onRemovePrintOption
+    onRemovePrintOption,
 }) {
     return (
         <form
             onSubmit={onSubmit}
-            className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 space-y-8"
+            className="max-w-5xl mx-auto bg-white rounded-xl shadow p-6 space-y-6 text-sm"
             noValidate
         >
-            <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="flex flex-col">
-                    <label className="mb-2 font-semibold text-gray-700">Название</label>
-                    <input
-                        className="input input-bordered"
-                        placeholder="Название"
-                        value={form.name}
-                        onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        required
-                    />
-                </div>
-                <div className="flex flex-col">
-                    <label className="mb-2 font-semibold text-gray-700">Тип</label>
-                    <input
-                        className="input input-bordered"
-                        placeholder="Тип"
-                        value={form.type}
-                        onChange={(e) => setForm({ ...form, type: e.target.value })}
-                        required
-                    />
-                </div>
-                <div className="flex flex-col">
-                    <label className="mb-2 font-semibold text-gray-700">Категория</label>
-                    <input
-                        className="input input-bordered"
-                        placeholder="Категория"
-                        value={form.category}
-                        onChange={(e) => setForm({ ...form, category: e.target.value })}
-                    />
-                </div>
-            </section>
-
-            <section>
-                <label className="mb-2 font-semibold text-gray-700 block">Описание</label>
-                <textarea
-                    rows={4}
-                    className="input input-bordered w-full resize-none"
-                    placeholder="Описание"
-                    value={form.description}
-                    onChange={(e) => setForm({ ...form, description: e.target.value })}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <input
+                    className="input input-bordered"
+                    placeholder="Название"
+                    value={form.name || ''}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
                     required
                 />
-            </section>
+                <input
+                    className="input input-bordered"
+                    placeholder="Категория"
+                    value={form.category || ''}
+                    onChange={(e) => setForm({ ...form, category: e.target.value })}
+                    required
+                />
+                <input
+                    className="input input-bordered"
+                    placeholder="Валюта"
+                    value={form.currency || ''}
+                    onChange={(e) => setForm({ ...form, currency: e.target.value })}
+                    required
+                />
+            </div>
 
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex flex-col">
-                    <label className="mb-2 font-semibold text-gray-700">URL картинки (через запятую)</label>
-                    <input
-                        className="input input-bordered"
-                        value={form.images.join(", ")}
-                        onChange={(e) =>
-                            setForm({
-                                ...form,
-                                images: e.target.value
-                                    .split(",")
-                                    .map((url) => url.trim())
-                                    .filter((url) => url.length > 0),
-                            })
-                        }
-                    />
-                </div>
+            <textarea
+                className="input input-bordered w-full resize-none"
+                placeholder="Описание"
+                value={form.description || ''}
+                onChange={(e) => setForm({ ...form, description: e.target.value })}
+                rows={3}
+                required
+            />
 
-                <div className="flex flex-col">
-                    <label className="mb-2 font-semibold text-gray-700">Теги (через запятую)</label>
-                    <input
-                        className="input input-bordered"
-                        value={form.tags.join(", ")}
-                        onChange={(e) =>
-                            setForm({
-                                ...form,
-                                tags: e.target.value.split(",").map((t) => t.trim()),
-                            })
-                        }
-                    />
-                </div>
-            </section>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <input
+                    className="input input-bordered"
+                    placeholder="Тип"
+                    value={form.type || ''}
+                    onChange={(e) => setForm({ ...form, type: e.target.value })}
+                    required
+                />
+                <input
+                    className="input input-bordered"
+                    placeholder="Вес"
+                    value={form.weight || ''}
+                    onChange={(e) => setForm({ ...form, weight: e.target.value })}
+                />
+                <input
+                    className="input input-bordered"
+                    placeholder="Метод нанесения"
+                    value={form.appMethod || ''}
+                    onChange={(e) => setForm({ ...form, appMethod: e.target.value })}
+                />
+                <input
+                    className="input input-bordered"
+                    placeholder="Материал"
+                    value={form.material || ''}
+                    onChange={(e) => setForm({ ...form, material: e.target.value })}
+                    required
+                />
+                <input
+                    className="input input-bordered"
+                    placeholder="Плотность"
+                    value={form.density || ''}
+                    onChange={(e) => setForm({ ...form, density: e.target.value })}
+                    required
+                />
+                <input
+                    className="input input-bordered"
+                    placeholder="Размер"
+                    value={form.size || ''}
+                    onChange={(e) => setForm({ ...form, size: e.target.value })}
+                    required
+                />
+                <input
+                    className="input input-bordered col-span-2"
+                    placeholder="Цвет ручек"
+                    value={form.handleColor || ''}
+                    onChange={(e) => setForm({ ...form, handleColor: e.target.value })}
+                />
+            </div>
 
-            <section className="bg-indigo-50 rounded-md p-6 shadow-inner">
-                <h3 className="text-lg font-semibold text-indigo-700 mb-4">Цены по количеству</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                {[
+                    ["bottom", "Дно"],
+                    ["handle", "Ручки"],
+                    ["docsPocket", "Карман под документы"],
+                    ["stickyAss", "Липкая лента"],
+                    ["window", "Окошко"],
+                    ["zipLock", "Zip Lock"],
+                ].map(([key, label]) => (
+                    <label key={key} className="flex items-center gap-1">
+                        <input
+                            type="checkbox"
+                            checked={form[key] || false}
+                            onChange={(e) => setForm({ ...form, [key]: e.target.checked })}
+                        />
+                        {label}
+                    </label>
+                ))}
+            </div>
+
+            <input
+                className="input input-bordered w-full"
+                placeholder="Теги (через запятую)"
+                value={form.tags?.join(", ") || ''}
+                onChange={(e) =>
+                    setForm({
+                        ...form,
+                        tags: e.target.value.split(",").map((t) => t.trim()),
+                    })
+                }
+            />
+
+            <input
+                className="input input-bordered w-full"
+                placeholder="Ссылки на изображения (через запятую)"
+                value={form.images?.join(", ") || ''}
+                onChange={(e) =>
+                    setForm({
+                        ...form,
+                        images: e.target.value.split(",").map((t) => t.trim()),
+                    })
+                }
+            />
+
+            <section className="bg-indigo-50 p-4 rounded">
+                <h3 className="font-semibold text-indigo-700 mb-2">Цены по количеству</h3>
                 {form.price.map((p, idx) => (
-                    <div key={idx} className="flex flex-col md:flex-row gap-3 items-start mb-3">
-                        <div className="flex flex-col flex-1">
-                            <label className="mb-1 text-sm font-medium text-gray-700">От (шт)</label>
-                            <input
-                                className="input input-bordered"
-                                type="number"
-                                min={0}
-                                value={p.minQty}
-                                onChange={(e) =>
-                                    setForm((prev) => {
-                                        const updated = [...prev.price];
-                                        updated[idx].minQty = parseInt(e.target.value) || 0;
-                                        return { ...prev, price: updated };
-                                    })
-                                }
-                            />
-                        </div>
-                        <div className="flex flex-col flex-1">
-                            <label className="mb-1 text-sm font-medium text-gray-700">Цена</label>
-                            <input
-                                className="input input-bordered"
-                                type="number"
-                                step="10"
-                                min={0}
-                                value={p.price}
-                                onChange={(e) =>
-                                    setForm((prev) => {
-                                        const updated = [...prev.price];
-                                        updated[idx].price = parseFloat(e.target.value) || 0;
-                                        return { ...prev, price: updated };
-                                    })
-                                }
-                            />
-                        </div>
+                    <div key={idx} className="flex gap-2 mb-2">
+                        <input
+                            className="input input-bordered w-1/3"
+                            type="number"
+                            placeholder="От (шт)"
+                            value={p.minQty || 0}
+                            onChange={(e) => {
+                                const updated = [...form.price];
+                                updated[idx].minQty = parseInt(e.target.value) || 0;
+                                setForm({ ...form, price: updated });
+                            }}
+                        />
+                        <input
+                            className="input input-bordered w-1/3"
+                            type="number"
+                            placeholder="Цена"
+                            value={p.price || 0}
+                            onChange={(e) => {
+                                const updated = [...form.price];
+                                updated[idx].price = parseFloat(e.target.value) || 0;
+                                setForm({ ...form, price: updated });
+                            }}
+                        />
                         <button
                             type="button"
                             onClick={() =>
-                                setForm((prev) => ({
-                                    ...prev,
-                                    price: prev.price.filter((_, i) => i !== idx),
-                                }))
+                                setForm({
+                                    ...form,
+                                    price: form.price.filter((_, i) => i !== idx),
+                                })
                             }
-                            className="self-end text-red-600 hover:text-red-800 transition"
-                            aria-label="Удалить цену"
-                        >
-                            ✕
-                        </button>
+                            className="text-red-500 hover:text-red-700"
+                        >✕</button>
                     </div>
                 ))}
                 <button
                     type="button"
                     onClick={() =>
-                        setForm((prev) => ({
-                            ...prev,
-                            price: [...prev.price, { minQty: 0, price: 0 }],
-                        }))
+                        setForm({
+                            ...form,
+                            price: [...form.price, { minQty: 0, price: 0 }],
+                        })
                     }
-                    className="text-indigo-700 font-semibold hover:text-indigo-900 transition"
+                    className="text-indigo-600 hover:text-indigo-800"
                 >
                     + Добавить цену
                 </button>
             </section>
 
-            <section className="bg-green-50 rounded-md p-6 shadow-inner">
-                <h3 className="text-lg font-semibold text-green-700 mb-4">Опции печати</h3>
-                {form.printOptions.map((opt, idx) => (
-                    <div key={idx} className="flex flex-col md:flex-row gap-3 items-center mb-3">
-                        <input
-                            className="input input-bordered flex-1"
-                            placeholder="Код"
-                            value={opt.code}
-                            onChange={(e) => onPrintOptionChange(idx, "code", e.target.value)}
-                        />
-                        <input
-                            className="input input-bordered flex-1"
-                            placeholder="Кол-во"
-                            value={opt.quantity}
-                            onChange={(e) => onPrintOptionChange(idx, "quantity", e.target.value)}
-                        />
-                        <input
-                            className="input input-bordered flex-1"
-                            type="number"
-                            min={0}
-                            placeholder="Цена"
-                            value={opt.price}
-                            onChange={(e) =>
-                                onPrintOptionChange(idx, "price", parseFloat(e.target.value) || 0)
-                            }
-                        />
-                        <button
-                            type="button"
-                            onClick={() => onRemovePrintOption(idx)}
-                            className="text-red-600 hover:text-red-800 transition"
-                            aria-label="Удалить"
-                        >
-                            ✕
-                        </button>
-                    </div>
-                ))}
+            <section className="bg-green-50 p-4 rounded">
+                <h3 className="font-semibold text-green-700 mb-2">Опции печати</h3>
+                <div className="max-h-64 overflow-y-auto pr-2 space-y-2">
+                    {form.printOptions.map((opt, idx) => (
+                        <div key={idx} className="flex flex-wrap gap-2 items-center">
+                            <input
+                                className="input input-bordered w-24"
+                                placeholder="Код"
+                                value={opt.code || ''}
+                                onChange={(e) => onPrintOptionChange(idx, "code", e.target.value)}
+                            />
+                            <input
+                                className="input input-bordered w-24"
+                                placeholder="Тираж"
+                                value={opt.quantity || ''}
+                                onChange={(e) => onPrintOptionChange(idx, "quantity", e.target.value)}
+                            />
+                            <input
+                                className="input input-bordered w-28"
+                                placeholder="Цена печати"
+                                type="number"
+                                value={opt.price || 0}
+                                onChange={(e) =>
+                                    onPrintOptionChange(idx, "price", parseFloat(e.target.value) || 0)
+                                }
+                            />
+                            <button
+                                type="button"
+                                onClick={() => onRemovePrintOption(idx)}
+                                className="text-red-500 hover:text-red-700 text-lg"
+                            >✕</button>
+                        </div>
+                    ))}
+                </div>
+
                 <button
                     type="button"
                     onClick={onAddPrintOption}
-                    className="text-green-700 font-semibold hover:text-green-900 transition"
+                    className="mt-2 text-green-600 hover:text-green-800"
                 >
                     + Добавить опцию
                 </button>
             </section>
 
-            <div className="flex items-center gap-4 justify-center mt-6">
-                <button
-                    type="submit"
-                    className="bg-indigo-600 text-white px-10 py-3 rounded-full font-bold hover:bg-indigo-700 transition-shadow shadow-md"
-                >
-                    {editId ? "Обновить" : "Создать"}
-                </button>
+
+            <div className="flex justify-end gap-4">
                 {editId && (
                     <button
                         type="button"
                         onClick={onCancel}
-                        className="px-10 py-3 rounded-full border-2 border-gray-300 hover:border-gray-500 transition font-semibold"
+                        className="px-4 py-2 border rounded hover:bg-gray-100"
                     >
                         Отмена
                     </button>
                 )}
+                <button
+                    type="submit"
+                    className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                >
+                    {editId ? "Обновить" : "Создать"}
+                </button>
             </div>
         </form>
     );
