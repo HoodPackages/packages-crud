@@ -19,7 +19,16 @@ export function PackageCard({ pkg, onEdit, onDelete }) {
         <h2 className="font-bold text-xl text-gray-800 mb-1">{pkg.name}</h2>
         <p className="text-gray-600 text-sm mb-2">{pkg.description}</p>
         <p className="text-sm text-indigo-600 mb-1">Тип: <span className="font-semibold">{pkg.type}</span></p>
-        <p className="text-green-700 font-bold text-lg mb-3">Цена: {pkg.price} грн</p>
+        {pkg.price?.length > 0 && (
+          <div className="mb-3">
+            <h4 className="text-green-700 font-bold text-sm">Цены:</h4>
+            <ul className="text-sm text-gray-700 list-disc list-inside">
+              {pkg.price.map((p, i) => (
+                <li key={i}>от {p.minQty} шт — {p.price} {pkg.currency}</li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {pkg.printOptions?.length > 0 && (
           <div className="mb-2">
