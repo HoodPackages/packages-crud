@@ -173,7 +173,7 @@ export default function ProductManagerPage() {
                     type="button"
                     onClick={() => setMode("patterns")}
                     className={`px-6 py-3 rounded-full font-semibold shadow-md transition
-                    ${mode === "prints"
+                    ${mode === "patterns"
                             ? "bg-indigo-600 text-white shadow-indigo-400"
                             : "bg-gray-200 text-gray-600 hover:bg-indigo-100"
                         }`}
