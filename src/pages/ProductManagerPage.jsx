@@ -38,11 +38,25 @@ export default function ProductManagerPage() {
     const [form, setForm] = useState(initialForm);
     const [editId, setEditId] = useState(null);
 
+    const [searchTerm, setSearchTerm] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState("Все");
+
+    const [categories, setCategories] = useState([]);
+
     const fetchPackages = async () => {
         const res = await fetch(API_URL);
         const data = await res.json();
         setPackages(data);
+
+        const uniqueCategories = ["Все", ...new Set(data.map(pkg => pkg.category || "Без категории"))];
+        setCategories(uniqueCategories);
     };
+
+    const filteredPackages = packages.filter(pkg => {
+        const nameMatch = pkg.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const categoryMatch = selectedCategory === "Все" || pkg.category === selectedCategory;
+        return nameMatch && categoryMatch;
+    });
 
     useEffect(() => {
         fetchPackages();
@@ -221,8 +235,31 @@ export default function ProductManagerPage() {
                 }
             })()}
 
+            <div className="max-w-6xl mx-auto my-6 flex flex-col md:flex-row items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
+                <input
+                    type="text"
+                    placeholder="Поиск по названию..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full md:w-72 rounded-lg border border-gray-300 bg-white px-5 py-3 text-gray-900 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300 ease-in-out caret-indigo-600"
+                />
+                <select
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    className="w-full md:w-72 rounded-lg border border-gray-300 bg-white px-5 py-3 text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300 ease-in-out cursor-pointer"
+                >
+                    {categories.map((cat, i) => (
+                        <option key={i} value={cat}>
+                            {cat}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
+
+
             <section className="mt-16 max-w-6xl mx-auto grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                {packages.map((pkg) => (
+                {filteredPackages.map(pkg => (
                     <PackageCard
                         key={pkg._id}
                         pkg={pkg}
