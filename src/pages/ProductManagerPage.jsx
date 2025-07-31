@@ -123,7 +123,7 @@ export default function ProductManagerPage() {
     };
 
     return (
-        <div className="max-w-6xl mx-auto p-8 bg-gradient-to-b from-gray-100 to-white min-h-screen">
+        <div className="mx-auto p-8 min-h-screen">
             <h1 className="text-4xl font-extrabold mb-10 text-center text-gray-800 drop-shadow-md">
                 Backoffice
             </h1>
