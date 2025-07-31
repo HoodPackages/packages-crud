@@ -19,11 +19,25 @@ export function PackageCard({ pkg, onEdit, onDelete }) {
 
       <div>
         <h2 className="font-extrabold text-2xl text-gray-900 mb-2 truncate">{pkg.name}</h2>
+        <p className="text-sm font-semibold text-blue-600 uppercase tracking-wide mb-2 truncate">{pkg.category}</p>
         <p className="text-gray-600 text-sm mb-4 line-clamp-3">{pkg.description}</p>
 
-        <p className="text-indigo-700 text-sm mb-3">
-          <span className="font-semibold">Тип:</span> {pkg.type}
-        </p>
+        <div className="text-indigo-700 text-sm mb-3 space-y-1">
+          <p><span className="font-semibold">Тип:</span> {pkg.type}</p>
+          <p><span className="font-semibold">Материал:</span> {pkg.material}</p>
+          <p><span className="font-semibold">Цвет:</span> {pkg.color}</p>
+          <p><span className="font-semibold">Размер:</span> {pkg.size}</p>
+          <p><span className="font-semibold">Плотность:</span> {pkg.density}</p>
+          {pkg.weight && <p><span className="font-semibold">Вес:</span> {pkg.weight}</p>}
+          {pkg.appMethod && <p><span className="font-semibold">Метод нанесения:</span> {pkg.appMethod}</p>}
+          {pkg.handleColor && <p><span className="font-semibold">Цвет ручек:</span> {pkg.handleColor}</p>}
+          {pkg.bottom && <p><span className="font-semibold">Донная складка:</span> Да</p>}
+          {pkg.handle && <p><span className="font-semibold">Усиленная ручка:</span> Да</p>}
+          {pkg.docsPocket && <p><span className="font-semibold">Карман для документов:</span> Да</p>}
+          {pkg.stickyAss && <p><span className="font-semibold">Липкий клапан:</span> Да</p>}
+          {pkg.window && <p><span className="font-semibold">Окно:</span> Да</p>}
+          {pkg.zipLock && <p><span className="font-semibold">Zip-замок:</span> Да</p>}
+        </div>
 
         {pkg.price?.length > 0 && (
           <div className="mb-4">
