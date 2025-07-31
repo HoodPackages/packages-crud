@@ -125,7 +125,7 @@ export default function ProductManagerPage() {
     return (
         <div className="max-w-6xl mx-auto p-8 bg-gradient-to-b from-gray-100 to-white min-h-screen">
             <h1 className="text-4xl font-extrabold mb-10 text-center text-gray-800 drop-shadow-md">
-                CRUD Пакетов
+                Backoffice
             </h1>
 
             <div className="flex justify-center gap-6 mb-10">
