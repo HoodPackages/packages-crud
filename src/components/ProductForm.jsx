@@ -65,6 +65,12 @@ export default function ProductForm({
                 />
                 <input
                     className="input input-bordered"
+                    placeholder="Цвет"
+                    value={form.color || ''}
+                    onChange={(e) => setForm({ ...form, color: e.target.value })}
+                />
+                <input
+                    className="input input-bordered"
                     placeholder="Метод нанесения"
                     value={form.appMethod || ''}
                     onChange={(e) => setForm({ ...form, appMethod: e.target.value })}
@@ -91,7 +97,7 @@ export default function ProductForm({
                     required
                 />
                 <input
-                    className="input input-bordered col-span-2"
+                    className="input input-bordered"
                     placeholder="Цвет ручек"
                     value={form.handleColor || ''}
                     onChange={(e) => setForm({ ...form, handleColor: e.target.value })}
