@@ -3,6 +3,7 @@ import { PackageCard } from "../components/PackageCard";
 import FileDropzone from "../components/FileDropzone";
 import PrintPriceUploader from "../components/PrintPriceUploader";
 import ProductForm from "../components/ProductForm";
+import PatternManager from "../components/PatternManager";
 
 const API_URL = "http://localhost:5000/api/products";
 
@@ -168,6 +169,17 @@ export default function ProductManagerPage() {
                 >
                     Цены печатей
                 </button>
+                <button
+                    type="button"
+                    onClick={() => setMode("patterns")}
+                    className={`px-6 py-3 rounded-full font-semibold shadow-md transition
+                    ${mode === "prints"
+                            ? "bg-indigo-600 text-white shadow-indigo-400"
+                            : "bg-gray-200 text-gray-600 hover:bg-indigo-100"
+                        }`}
+                >
+                    Управление шаблонами
+                </button>
             </div>
 
             {(() => {
@@ -184,6 +196,12 @@ export default function ProductManagerPage() {
                                 <PrintPriceUploader />
                             </div>
                         );
+                    case "patterns":
+                        return (
+                            <div className="max-3-xl mx-auto">
+                                <PatternManager />
+                            </div>
+                        )
                     default:
                         return (
                             <ProductForm
