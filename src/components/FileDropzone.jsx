@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
-const API_UPLOAD_URL = "http://localhost:5000/api/upload";
+const API_UPLOAD_URL = "https://packages-server-75ra.onrender.com/api/upload";
 
 export default function FileDropzone() {
     const [uploading, setUploading] = useState(false);
