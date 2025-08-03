@@ -5,7 +5,7 @@ import PrintPriceUploader from "../components/PrintPriceUploader";
 import ProductForm from "../components/ProductForm";
 import PatternManager from "../components/PatternManager";
 
-const API_URL = "http://localhost:5000/api/products";
+const API_URL = "https://packages-server-75ra.onrender.com/api/products";
 
 const initialForm = {
     name: "",
