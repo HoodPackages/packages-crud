@@ -10,7 +10,7 @@ export default function PrintPriceUploader() {
   // Получить категории товаров из базы
   const fetchCategories = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/products");
+      const res = await fetch("https://packages-server-75ra.onrender.com/api/products");
       const data = await res.json();
       const uniqueCategories = [...new Set(data.map(p => p.category).filter(Boolean))];
       setCategories(uniqueCategories);
@@ -21,7 +21,7 @@ export default function PrintPriceUploader() {
 
   const fetchFiles = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/patterns"); // Сервер должен отдавать список файлов
+      const res = await fetch("https://packages-server-75ra.onrender.com/api/patterns"); // Сервер должен отдавать список файлов
       const data = await res.json();
       setFiles(data.files || []);
     } catch (err) {
@@ -41,7 +41,7 @@ export default function PrintPriceUploader() {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/products/update-print-prices", {
+      const res = await fetch("https://packages-server-75ra.onrender.com/api/products/update-print-prices", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ category: selectedCategory, filename: selectedFile }),
