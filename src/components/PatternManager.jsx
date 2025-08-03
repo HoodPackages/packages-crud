@@ -12,7 +12,7 @@ export default function PatternManager() {
 
   const fetchPatterns = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/patterns')
+      const res = await axios.get('https://packages-server-75ra.onrender.com/api/patterns')
       if (Array.isArray(res.data.files)) {
         setPatterns(res.data.files)
       } else {
@@ -32,7 +32,7 @@ export default function PatternManager() {
 
     setUploading(true)
     try {
-      await axios.post('http://localhost:5000/api/patterns/upload', formData, {
+      await axios.post('https://packages-server-75ra.onrender.com/api/patterns/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       fetchPatterns()
@@ -45,7 +45,7 @@ export default function PatternManager() {
 
   const handleDelete = async (filename) => {
     try {
-      await axios.delete(`http://localhost:5000/api/patterns/${filename}`)
+      await axios.delete(`https://packages-server-75ra.onrender.com/api/patterns/${filename}`)
       fetchPatterns()
     } catch (err) {
       console.error('Ошибка при удалении файла', err)
@@ -55,7 +55,7 @@ export default function PatternManager() {
   const handleDownload = (filename) => {
     // Прямой переход по ссылке на серверный endpoint загрузки
     const link = document.createElement('a')
-    link.href = `http://localhost:5000/api/patterns/download/${encodeURIComponent(filename)}`
+    link.href = `https://packages-server-75ra.onrender.com/api/patterns/download/${encodeURIComponent(filename)}`
     link.download = filename
     document.body.appendChild(link)
     link.click()
