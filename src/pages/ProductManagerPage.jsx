@@ -167,7 +167,7 @@ export default function ProductManagerPage() {
                 </button>
                 <button
                     type="button"
-                    onClick={() => window.open("http://localhost:5000/api/upload/export", "_blank")}
+                    onClick={() => window.open("{API_URL}/api/upload/export", "_blank")}
                     className="px-6 py-3 rounded-full font-semibold shadow-md bg-green-500 text-white hover:bg-green-600"
                 >
                     Выгрузить товары в Excel
