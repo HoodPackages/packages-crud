@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Trash2, Upload, Download } from 'lucide-react'
 
+// https://packages-server-75ra.onrender.com
+const API_URL = "http://localhost:5000";
+
 export default function PatternManager() {
   const [patterns, setPatterns] = useState([])
   const [uploading, setUploading] = useState(false)
@@ -12,7 +15,7 @@ export default function PatternManager() {
 
   const fetchPatterns = async () => {
     try {
-      const res = await axios.get('https://packages-server-75ra.onrender.com/api/patterns')
+      const res = await axios.get(`${API_URL}/api/patterns`)
       if (Array.isArray(res.data.files)) {
         setPatterns(res.data.files)
       } else {
@@ -32,7 +35,7 @@ export default function PatternManager() {
 
     setUploading(true)
     try {
-      await axios.post('https://packages-server-75ra.onrender.com/api/patterns/upload', formData, {
+      await axios.post(`${API_URL}/api/patterns/upload`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       fetchPatterns()
@@ -45,7 +48,7 @@ export default function PatternManager() {
 
   const handleDelete = async (filename) => {
     try {
-      await axios.delete(`https://packages-server-75ra.onrender.com/api/patterns/${filename}`)
+      await axios.delete(`${API_URL}/api/patterns/${filename}`)
       fetchPatterns()
     } catch (err) {
       console.error('Ошибка при удалении файла', err)
@@ -53,9 +56,8 @@ export default function PatternManager() {
   }
 
   const handleDownload = (filename) => {
-    // Прямой переход по ссылке на серверный endpoint загрузки
     const link = document.createElement('a')
-    link.href = `https://packages-server-75ra.onrender.com/api/patterns/download/${encodeURIComponent(filename)}`
+    link.href = `${API_URL}/api/patterns/download/${encodeURIComponent(filename)}`
     link.download = filename
     document.body.appendChild(link)
     link.click()

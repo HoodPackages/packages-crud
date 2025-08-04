@@ -1,7 +1,8 @@
 import { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
-const API_UPLOAD_URL = "https://packages-server-75ra.onrender.com/api/upload";
+// https://packages-server-75ra.onrender.com
+const API_URL = "http://localhost:5000";
 
 export default function FileDropzone() {
     const [uploading, setUploading] = useState(false);
@@ -20,7 +21,7 @@ export default function FileDropzone() {
         setFileName(null);
 
         try {
-            const response = await fetch(API_UPLOAD_URL, {
+            const response = await fetch(`${API_URL}/api/upload`, {
                 method: "POST",
                 body: formData,
             });

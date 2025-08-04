@@ -4,8 +4,9 @@ import FileDropzone from "../components/FileDropzone";
 import PrintPriceUploader from "../components/PrintPriceUploader";
 import ProductForm from "../components/ProductForm";
 import PatternManager from "../components/PatternManager";
-
-const API_URL = "https://packages-server-75ra.onrender.com/api/products";
+    
+// https://packages-server-75ra.onrender.com
+const API_URL = "http://localhost:5000";
 
 const initialForm = {
     name: "",
@@ -44,7 +45,7 @@ export default function ProductManagerPage() {
     const [categories, setCategories] = useState([]);
 
     const fetchPackages = async () => {
-        const res = await fetch(API_URL);
+        const res = await fetch(`${API_URL}/api/products`);
         const data = await res.json();
         setPackages(data);
 
@@ -65,13 +66,13 @@ export default function ProductManagerPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (editId) {
-            await fetch(`${API_URL}/${editId}`, {
+            await fetch(`${API_URL}/api/products/${editId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(form),
             });
         } else {
-            await fetch(API_URL, {
+            await fetch(`${API_URL}/api/products`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(form),
@@ -84,7 +85,7 @@ export default function ProductManagerPage() {
 
     const handleDelete = async (id) => {
         if (window.confirm("Удалить этот пакет?")) {
-            await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+            await fetch(`${API_URL}/api/products/${id}`, { method: "DELETE" });
             fetchPackages();
         }
     };
@@ -167,7 +168,7 @@ export default function ProductManagerPage() {
                 </button>
                 <button
                     type="button"
-                    onClick={() => window.open("{API_URL}/api/upload/export", "_blank")}
+                    onClick={() => window.open(`${API_URL}/api/upload/export`, "_blank")}
                     className="px-6 py-3 rounded-full font-semibold shadow-md bg-green-500 text-white hover:bg-green-600"
                 >
                     Выгрузить товары в Excel

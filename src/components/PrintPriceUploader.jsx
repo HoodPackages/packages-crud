@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 
+// https://packages-server-75ra.onrender.com
+const API_URL = "http://localhost:5000"
+
 export default function PrintPriceUploader() {
   const [categories, setCategories] = useState([]);
   const [files, setFiles] = useState([]);
@@ -7,10 +10,9 @@ export default function PrintPriceUploader() {
   const [selectedFile, setSelectedFile] = useState("");
   const [message, setMessage] = useState("");
 
-  // Получить категории товаров из базы
   const fetchCategories = async () => {
     try {
-      const res = await fetch("https://packages-server-75ra.onrender.com/api/products");
+      const res = await fetch(`${API_URL}/api/products`);
       const data = await res.json();
       const uniqueCategories = [...new Set(data.map(p => p.category).filter(Boolean))];
       setCategories(uniqueCategories);
@@ -21,7 +23,7 @@ export default function PrintPriceUploader() {
 
   const fetchFiles = async () => {
     try {
-      const res = await fetch("https://packages-server-75ra.onrender.com/api/patterns"); // Сервер должен отдавать список файлов
+      const res = await fetch(`${API_URL}/api/patterns`);
       const data = await res.json();
       setFiles(data.files || []);
     } catch (err) {
@@ -41,7 +43,7 @@ export default function PrintPriceUploader() {
     }
 
     try {
-      const res = await fetch("https://packages-server-75ra.onrender.com/api/products/update-print-prices", {
+      const res = await fetch(`${API_URL}/api/products/update-print-prices`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ category: selectedCategory, filename: selectedFile }),

@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import ProductManagerPage from "./pages/ProductManagerPage";
-import LoginPage from "./pages/LoginPage"; // Пока можно сделать заглушку
+import LoginPage from "./pages/LoginPage";
 
 export default function App() {
   return (
