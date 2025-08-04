@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { PackageCard } from "../components/PackageCard";
-import FileDropzone from "../components/FileDropzone";
-import PrintPriceUploader from "../components/PrintPriceUploader";
 import ProductForm from "../components/ProductForm";
-import PatternManager from "../components/PatternManager";
 
 // https://packages-server-75ra.onrender.com
 const API_URL = "http://localhost:5000";
