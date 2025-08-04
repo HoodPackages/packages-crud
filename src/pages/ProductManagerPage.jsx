@@ -4,7 +4,7 @@ import FileDropzone from "../components/FileDropzone";
 import PrintPriceUploader from "../components/PrintPriceUploader";
 import ProductForm from "../components/ProductForm";
 import PatternManager from "../components/PatternManager";
-    
+
 // https://packages-server-75ra.onrender.com
 const API_URL = "http://localhost:5000";
 
@@ -34,7 +34,6 @@ const initialForm = {
 };
 
 export default function ProductManagerPage() {
-    const [mode, setMode] = useState("excel");
     const [packages, setPackages] = useState([]);
     const [form, setForm] = useState(initialForm);
     const [editId, setEditId] = useState(null);
@@ -137,104 +136,38 @@ export default function ProductManagerPage() {
         setForm({ ...form, printOptions: updated });
     };
 
+    const [isFormOpen, setIsFormOpen] = useState(false);
+
     return (
         <div className="mx-auto p-8 min-h-screen">
-            <h1 className="text-4xl font-extrabold mb-10 text-center text-gray-800 drop-shadow-md">
-                Backoffice
-            </h1>
 
-            <div className="flex justify-center gap-6 mb-10">
-                <button
-                    type="button"
-                    onClick={() => setMode("manual")}
-                    className={`px-6 py-3 rounded-full font-semibold shadow-md transition 
-                    ${mode === "manual"
-                            ? "bg-indigo-600 text-white shadow-indigo-400"
-                            : "bg-gray-200 text-gray-600 hover:bg-indigo-100"
-                        }`}
-                >
-                    Добавить один товар
-                </button>
-                <button
-                    type="button"
-                    onClick={() => setMode("excel")}
-                    className={`px-6 py-3 rounded-full font-semibold shadow-md transition
-                    ${mode === "excel"
-                            ? "bg-indigo-600 text-white shadow-indigo-400"
-                            : "bg-gray-200 text-gray-600 hover:bg-indigo-100"
-                        }`}
-                >
-                    Загрузить файл с товарами
-                </button>
-                <button
-                    type="button"
-                    onClick={() => window.open(`${API_URL}/api/upload/export`, "_blank")}
-                    className="px-6 py-3 rounded-full font-semibold shadow-md bg-green-500 text-white hover:bg-green-600"
-                >
-                    Выгрузить товары в Excel
-                </button>
-                <button
-                    type="button"
-                    onClick={() => setMode("prints")}
-                    className={`px-6 py-3 rounded-full font-semibold shadow-md transition
-                    ${mode === "prints"
-                            ? "bg-indigo-600 text-white shadow-indigo-400"
-                            : "bg-gray-200 text-gray-600 hover:bg-indigo-100"
-                        }`}
-                >
-                    Цены печатей
-                </button>
-                <button
-                    type="button"
-                    onClick={() => setMode("patterns")}
-                    className={`px-6 py-3 rounded-full font-semibold shadow-md transition
-                    ${mode === "patterns"
-                            ? "bg-indigo-600 text-white shadow-indigo-400"
-                            : "bg-gray-200 text-gray-600 hover:bg-indigo-100"
-                        }`}
-                >
-                    Управление шаблонами
-                </button>
-            </div>
+            {!isFormOpen && (
+                <div className="mb-6 flex justify-end">
+                    <button
+                        onClick={() => setIsFormOpen(true)}
+                        className="px-6 py-3 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 shadow transition"
+                    >
+                        Форма товара
+                    </button>
+                </div>
+            )}
 
-            {(() => {
-                switch (mode) {
-                    case "excel":
-                        return (
-                            <div className="max-w-3xl mx-auto">
-                                <FileDropzone />
-                            </div>
-                        );
-                    case "prints":
-                        return (
-                            <div className="max-w-3xl mx-auto">
-                                <PrintPriceUploader />
-                            </div>
-                        );
-                    case "patterns":
-                        return (
-                            <div className="max-3-xl mx-auto">
-                                <PatternManager />
-                            </div>
-                        )
-                    default:
-                        return (
-                            <ProductForm
-                                form={form}
-                                setForm={setForm}
-                                onSubmit={handleSubmit}
-                                editId={editId}
-                                onCancel={() => {
-                                    setEditId(null);
-                                    setForm(initialForm);
-                                }}
-                                onPrintOptionChange={handlePrintOptionChange}
-                                onAddPrintOption={handleAddPrintOption}
-                                onRemovePrintOption={handleRemovePrintOption}
-                            />
-                        );
-                }
-            })()}
+            {isFormOpen && (
+                <ProductForm
+                    form={form}
+                    setForm={setForm}
+                    onSubmit={handleSubmit}
+                    editId={editId}
+                    onCancel={() => {
+                        setEditId(null);
+                        setForm(initialForm);
+                        setIsFormOpen(false);
+                    }}
+                    onPrintOptionChange={handlePrintOptionChange}
+                    onAddPrintOption={handleAddPrintOption}
+                    onRemovePrintOption={handleRemovePrintOption}
+                />
+            )}
 
             <div className="max-w-6xl mx-auto my-6 flex flex-col md:flex-row items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
                 <input
@@ -256,8 +189,6 @@ export default function ProductManagerPage() {
                     ))}
                 </select>
             </div>
-
-
 
             <section className="mt-16 max-w-6xl mx-auto grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {filteredPackages.map(pkg => (

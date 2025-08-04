@@ -77,9 +77,8 @@ export default function PatternManager() {
         />
         <button
           disabled={uploading}
-          className={`flex items-center gap-2 px-4 py-2 rounded text-white font-semibold transition ${
-            uploading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
-          }`}
+          className={`flex items-center gap-2 px-4 py-2 rounded text-white font-semibold transition ${uploading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+            }`}
         >
           <Upload size={18} />
           Загрузить
