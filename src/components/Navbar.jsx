@@ -5,7 +5,7 @@ const API_URL = "http://localhost:5000";
 export default function Navbar() {
     return (
         <>
-            <aside className="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+            <aside className="fixed top-0 left-0 z-50 flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
                 <h2 className='text-4xl font-extrabold text-center text-yellow-300 drop-shadow-md'>Backoffice</h2>
 
                 <div className="flex flex-col justify-between flex-1 mt-6">
