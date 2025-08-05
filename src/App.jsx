@@ -5,6 +5,7 @@ import Layout from "./components/Layout";
 import FileDropzone from "./components/FileDropzone";
 import PrintPriceUploader from "./components/PrintPriceUploader";
 import PatternManager from "./components/PatternManager";
+import SupportPage from "./pages/SupportPage";
 
 export default function App() {
   return (
@@ -20,6 +21,8 @@ export default function App() {
           <Route path="/import-products" element={<FileDropzone />} />
           <Route path="/pricing-price-uploader" element={<PrintPriceUploader />} />
           <Route path="/patterns-manage" element={<PatternManager />} />
+          <Route path="/support" element={<SupportPage />} />
+          <Route path="/support/:ticketId" element={<SupportPage />} />
         </Route>
 
         <Route path="*" element={<div className="text-center mt-10 text-xl">Страница не найдена</div>} />
