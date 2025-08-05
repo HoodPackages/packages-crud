@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-
-const API_URL = "http://localhost:5000";
+import { API_URL } from "../assets/config";
 
 export default function Navbar() {
     const [collapsed, setCollapsed] = useState(false);
@@ -105,4 +104,3 @@ export default function Navbar() {
         </>
     );
 }
-    

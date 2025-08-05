@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PackageCard } from "../components/PackageCard";
 import ProductForm from "../components/ProductForm";
-
-// https://packages-server-75ra.onrender.com
-const API_URL = "http://localhost:5000";
+import { API_URL } from "../assets/config";
 
 const initialForm = {
     name: "",

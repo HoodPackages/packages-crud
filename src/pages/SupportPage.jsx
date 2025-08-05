@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-
-const API_URL = "http://localhost:5000";
+import { API_URL } from "../assets/config";
 
 export default function SupportPage() {
     const [tickets, setTickets] = useState([]);
@@ -74,8 +73,8 @@ export default function SupportPage() {
                         navigate("/support");
                     }}
                     className={`px-3 py-2 rounded text-sm ${activeTab === "awaiting reply"
-                            ? "bg-blue-600 text-white"
-                            : "bg-gray-200"
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-200"
                         }`}
                 >
                     Ожидают ответа
@@ -87,8 +86,8 @@ export default function SupportPage() {
                         navigate("/support");
                     }}
                     className={`px-3 py-2 rounded text-sm ${activeTab === "answered"
-                            ? "bg-green-600 text-white"
-                            : "bg-gray-200"
+                        ? "bg-green-600 text-white"
+                        : "bg-gray-200"
                         }`}
                 >
                     Отвеченные
@@ -131,8 +130,8 @@ export default function SupportPage() {
                                     <div
                                         key={idx}
                                         className={`p-3 rounded text-sm ${msg.direction === "in"
-                                                ? "bg-gray-100 text-left"
-                                                : "bg-blue-100 text-right"
+                                            ? "bg-gray-100 text-left"
+                                            : "bg-blue-100 text-right"
                                             }`}
                                     >
                                         <p className="whitespace-pre-wrap">{msg.text}</p>
