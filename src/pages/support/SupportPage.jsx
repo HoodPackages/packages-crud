@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { API_URL } from "../../../public/config";
+import { API_URL } from "../../assets/config";
 import TicketList from "../../components/support/TicketList";
 
 export default function SupportPage() {

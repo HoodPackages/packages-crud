@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PackageCard } from "../components/PackageCard";
 import ProductForm from "../components/ProductForm";
-import { API_URL } from "../../public/config";
+import { API_URL } from "../assets/config";
 
 const initialForm = {
     name: "",

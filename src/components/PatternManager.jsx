@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Trash2, Upload, Download } from 'lucide-react'
-import { API_URL } from "../../public/config";
+import { API_URL } from "../assets/config";
 
 export default function PatternManager() {
   const [patterns, setPatterns] = useState([])

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { API_URL } from "../../public/config";
+import { API_URL } from "../assets/config";
 
 export default function PrintPriceUploader() {
   const [categories, setCategories] = useState([]);

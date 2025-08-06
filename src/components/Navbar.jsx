@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { API_URL } from "../../public/config";
+import { API_URL } from "../assets/config";
 
 export default function Navbar() {
     const [collapsed, setCollapsed] = useState(false);
