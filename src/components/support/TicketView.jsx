@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../assets/config";
+import { API_URL } from "../../../public/config";
 import { Pencil } from "lucide-react";
 
 export default function TicketView({ ticket }) {

@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { API_URL } from "../assets/config";
+import { API_URL } from "../../public/config";
 
 export default function FileDropzone() {
     const [uploading, setUploading] = useState(false);
