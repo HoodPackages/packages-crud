@@ -28,7 +28,7 @@ export default function SupportPage() {
                         onClick={() => setActiveTab(status)}
                         className={`px-3 py-2 rounded text-sm ${activeTab === status ? "bg-blue-600 text-white" : "bg-gray-200"}`}
                     >
-                        {status === "awaiting reply" ? "Ожидают ответа" : "Отвеченные"}
+                        {status === "awaiting reply" ? "Ожидают ответа" : "Закрытые"}
                     </button>
                 ))}
             </div>
