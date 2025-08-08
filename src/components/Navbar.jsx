@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { API_URL } from "../assets/config";
 
-export default function Navbar() {
-    const [collapsed, setCollapsed] = useState(false);
+export default function Navbar({ collapsed, setCollapsed }) {
 
     const toggleSidebar = () => {
         setCollapsed(prev => !prev);
