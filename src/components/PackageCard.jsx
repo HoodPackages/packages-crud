@@ -1,21 +1,67 @@
 import React, { useState } from "react";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 export function PackageCard({ pkg, onEdit, onDelete }) {
   const [showAll, setShowAll] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   const toShow = showAll ? pkg.printOptions : pkg.printOptions.slice(0, 3);
+
+  const handlePrev = () => {
+    setCurrentImageIndex((prev) =>
+      prev === 0 ? pkg.images.length - 1 : prev - 1
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentImageIndex((prev) =>
+      prev === pkg.images.length - 1 ? 0 : prev + 1
+    );
+  };
+
 
   return (
     <div className="bg-white rounded-3xl shadow-lg border border-gray-200 hover:shadow-2xl transition-shadow duration-300 p-6 max-w-sm mx-auto">
       {pkg.images && pkg.images.length > 0 && (
-        <div className="w-full aspect-[4/5] rounded-xl overflow-hidden bg-gray-100 shadow-inner mb-4">
+        <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-gray-100 shadow-inner mb-4">
           <img
-            src={pkg.images[0]}
+            src={pkg.images[currentImageIndex]}
             alt={pkg.name}
-            className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105"
+            className="w-full h-full object-cover object-center transition-transform duration-300"
             loading="lazy"
           />
+
+          {pkg.images.length > 1 && (
+            <>
+              <button
+                onClick={handlePrev}
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-2 shadow-md"
+              >
+                <HiChevronLeft size={24} />
+              </button>
+              <button
+                onClick={handleNext}
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-2 shadow-md"
+              >
+                <HiChevronRight size={24} />
+              </button>
+
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-1.5">
+                {pkg.images.map((_, index) => (
+                  <span
+                    key={index}
+                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentImageIndex
+                        ? "bg-white shadow-md scale-110"
+                        : "bg-white/50"
+                      }`}
+                  ></span>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       )}
+
 
       <div>
         <h2 className="font-extrabold text-2xl text-gray-900 mb-2 truncate">{pkg.name}</h2>
@@ -108,6 +154,6 @@ export function PackageCard({ pkg, onEdit, onDelete }) {
           </button>
         </div>
       </div>
-    </div>
+    </div >
   );
 }

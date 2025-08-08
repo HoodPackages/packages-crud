@@ -15,6 +15,9 @@ export default function SupportPage() {
             .catch(err => console.error("Ошибка при загрузке тикетов:", err));
     }, []);
 
+    const awaitingCount = tickets.filter(t => t.status === "awaiting reply").length;
+    const answeredCount = tickets.filter(t => t.status === "answered").length;
+
     const filtered = tickets.filter(t => t.status === activeTab);
 
     return (
@@ -22,15 +25,18 @@ export default function SupportPage() {
             <h1 className="text-2xl font-bold mb-4">Обращения в поддержку</h1>
 
             <div className="flex gap-2 mb-4">
-                {["awaiting reply", "answered"].map((status) => (
-                    <button
-                        key={status}
-                        onClick={() => setActiveTab(status)}
-                        className={`px-3 py-2 rounded text-sm ${activeTab === status ? "bg-blue-600 text-white" : "bg-gray-200"}`}
-                    >
-                        {status === "awaiting reply" ? "Ожидают ответа" : "Закрытые"}
-                    </button>
-                ))}
+                <button
+                    onClick={() => setActiveTab("awaiting reply")}
+                    className={`px-3 py-2 rounded text-sm ${activeTab === "awaiting reply" ? "bg-blue-600 text-white" : "bg-gray-200"}`}
+                >
+                    Ожидают ответа ({awaitingCount})
+                </button>
+                <button
+                    onClick={() => setActiveTab("answered")}
+                    className={`px-3 py-2 rounded text-sm ${activeTab === "answered" ? "bg-blue-600 text-white" : "bg-gray-200"}`}
+                >
+                    Закрытые ({answeredCount})
+                </button>
             </div>
 
             <TicketList tickets={filtered} onSelect={(ticket) => navigate(`/support/${ticket._id}`)} />

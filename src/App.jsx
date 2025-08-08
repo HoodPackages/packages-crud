@@ -3,7 +3,7 @@ import ProductManagerPage from "./pages/ProductManagerPage";
 import LoginPage from "./pages/LoginPage";
 import Layout from "./components/Layout";
 import FileDropzone from "./components/FileDropzone";
-import PrintPriceUploader from "./components/PrintPriceUploader";
+import PrintPriceUploader from "./pages/PrintPriceUploader";
 import PatternManager from "./components/PatternManager";
 import SupportPage from "./pages/support/SupportPage";
 import SupportTicketPage from "./pages/support/SupportTicketPage";
