@@ -19,7 +19,7 @@ export default function Navbar({ collapsed, setCollapsed }) {
                     {!collapsed && (
                         <h2 className='text-3xl font-extrabold text-yellow-300 drop-shadow-md text-center w-full'>Backoffice</h2>
                     )}
-                    <button onClick={toggleSidebar} className="text-gray-500 dark:text-gray-300">
+                    <button onClick={toggleSidebar} className="text-gray-500 dark:text-gray-300 cursor-pointer">
                         {collapsed ? '➡️' : '⬅️'}
                     </button>
                 </div>

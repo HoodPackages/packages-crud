@@ -27,17 +27,22 @@ export default function SupportPage() {
             <div className="flex gap-2 mb-4">
                 <button
                     onClick={() => setActiveTab("awaiting reply")}
-                    className={`px-3 py-2 rounded text-sm ${activeTab === "awaiting reply" ? "bg-blue-600 text-white" : "bg-gray-200"}`}
+                    className={`px-3 py-2 rounded text-sm cursor-pointer ${activeTab === "awaiting reply"
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-200"
+                        }`}
                 >
                     Ожидают ответа ({awaitingCount})
                 </button>
                 <button
                     onClick={() => setActiveTab("answered")}
-                    className={`px-3 py-2 rounded text-sm ${activeTab === "answered" ? "bg-blue-600 text-white" : "bg-gray-200"}`}
+                    className={`px-3 py-2 rounded text-sm cursor-pointer ${activeTab === "answered" ? "bg-blue-600 text-white" : "bg-gray-200"
+                        }`}
                 >
                     Закрытые ({answeredCount})
                 </button>
             </div>
+
 
             <TicketList tickets={filtered} onSelect={(ticket) => navigate(`/support/${ticket._id}`)} />
         </div>
