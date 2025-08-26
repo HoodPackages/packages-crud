@@ -29,7 +29,7 @@ export default function PatternManager() {
     if (!file) return
 
     const formData = new FormData()
-    formData.append('pattern', file)
+    formData.append('file', file)
 
     setUploading(true)
     try {
