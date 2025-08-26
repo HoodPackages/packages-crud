@@ -6,6 +6,7 @@ import { API_URL } from "../assets/config";
 const initialForm = {
     name: "",
     category: "",
+    subcategory: "",
     currency: "",
     price: [],
     description: "",
@@ -43,14 +44,38 @@ export default function ProductManagerPage() {
         const data = await res.json();
         setPackages(data);
 
-        const uniqueCategories = ["Все", ...new Set(data.map(pkg => pkg.category || "Без категории"))];
-        setCategories(uniqueCategories);
+        const cats = {};
+
+        data.forEach(pkg => {
+            if (pkg.category) {
+                if (!cats[pkg.category]) {
+                    cats[pkg.category] = new Set();
+                }
+                if (pkg.subcategory) {
+                    cats[pkg.category].add(pkg.subcategory);
+                }
+            }
+        });
+
+        const structuredCategories = Object.keys(cats).map(cat => ({
+            category: cat,
+            subcategories: Array.from(cats[cat])
+        }));
+
+        setCategories(structuredCategories);
     };
 
     const filteredPackages = packages.filter(pkg => {
         const nameMatch = pkg.name.toLowerCase().includes(searchTerm.toLowerCase());
-        const categoryMatch = selectedCategory === "Все" || pkg.category === selectedCategory;
-        return nameMatch && categoryMatch;
+
+        if (selectedCategory === "Все") return nameMatch;
+
+        if (selectedCategory.includes(">")) {
+            const [cat, sub] = selectedCategory.split(">").map(s => s.trim());
+            return nameMatch && pkg.category === cat && pkg.subcategory === sub;
+        }
+
+        return nameMatch && pkg.category === selectedCategory;
     });
 
     useEffect(() => {
@@ -88,6 +113,7 @@ export default function ProductManagerPage() {
         setForm({
             name: pkg.name,
             category: pkg.category,
+            subcategory: pkg.subcategory,
             currency: pkg.currency,
             price: pkg.price || [],
             description: pkg.description,
@@ -177,10 +203,16 @@ export default function ProductManagerPage() {
                     onChange={(e) => setSelectedCategory(e.target.value)}
                     className="w-full md:w-72 rounded-lg border border-gray-300 bg-white px-5 py-3 text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300 ease-in-out cursor-pointer"
                 >
-                    {categories.map((cat, i) => (
-                        <option key={i} value={cat}>
-                            {cat}
-                        </option>
+                    <option value="Все">Все</option>
+                    {categories.map((catObj, i) => (
+                        <optgroup key={i} label={catObj.category}>
+                            <option value={catObj.category}>{catObj.category}</option>
+                            {catObj.subcategories.map((sub, j) => (
+                                <option key={`${i}-${j}`} value={`${catObj.category} > ${sub}`}>
+                                    {catObj.category} › {sub}
+                                </option>
+                            ))}
+                        </optgroup>
                     ))}
                 </select>
             </div>

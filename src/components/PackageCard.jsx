@@ -51,8 +51,8 @@ export function PackageCard({ pkg, onEdit, onDelete }) {
                   <span
                     key={index}
                     className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentImageIndex
-                        ? "bg-white shadow-md scale-110"
-                        : "bg-white/50"
+                      ? "bg-white shadow-md scale-110"
+                      : "bg-white/50"
                       }`}
                   ></span>
                 ))}
