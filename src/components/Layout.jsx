@@ -8,9 +8,10 @@ export default function Layout() {
   return (
     <div className="flex">
       <Navbar collapsed={collapsed} setCollapsed={setCollapsed} />
-      <main className={`flex-1 p-6 transition-all duration-300 ${collapsed ? "ml-20" : "ml-64"}`}>
+      <main className={`flex-1 p-6 transition-all duration-300 relative ${collapsed ? "ml-20" : "ml-64"}`}>
         <Outlet />
       </main>
+
     </div>
   );
 }
