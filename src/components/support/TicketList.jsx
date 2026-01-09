@@ -52,7 +52,7 @@ export default function TicketList({ tickets, onSelect }) {
     }
 
     if (!tickets) return <p className="text-gray-500">Загрузка...</p>;
-    if (tickets.length === 0) return <p className="text-gray-500">Нічого не знайдено</p>;
+    if (tickets.length === 0) return <p className="text-gray-500">Ничего не найдено</p>;
 
     return (
         <div className="relative flex flex-col min-h-[80vh]">
