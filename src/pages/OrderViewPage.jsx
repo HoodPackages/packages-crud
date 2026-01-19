@@ -66,6 +66,7 @@ export default function OrderViewPage() {
               </li>
             ))}
           </ul>
+          <h2>Сумма: {order.total} грн</h2>
         </div>
 
         {/* Layout */}
