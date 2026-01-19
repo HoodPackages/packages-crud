@@ -76,7 +76,7 @@ export default function TicketList({ tickets, onSelect }) {
                             type="text"
                             value={mergeTarget}
                             onChange={e => setMergeTarget(e.target.value)}
-                            placeholder="Введіть номер тикета"
+                            placeholder="Введите номер тикета"
                             className="ml-2 border rounded px-2 py-1 text-sm w-32"
                         />
                     </div>
