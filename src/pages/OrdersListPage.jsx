@@ -24,13 +24,13 @@ export default function OrdersListPage() {
     setOrders(orders.filter(o => o._id !== id));
   };
 
-  if (loading) return <div>Завантаження...</div>;
+  if (loading) return <div>Загрузка...</div>;
 
   return (
     <div className="p-6 bg-yellow-50 min-h-screen">
       <motion.h1 initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
                  className="text-3xl font-bold text-yellow-700 mb-6">
-        Замовлення
+        Заказы
       </motion.h1>
 
       <div className="grid gap-4">
@@ -63,10 +63,10 @@ export default function OrdersListPage() {
                   <Eye className="w-4 h-4" />
                 </button>
                 <button onClick={() => navigate(`/orders/${order._id}/edit`)} className="text-yellow-500">
-                  Редагувати
+                  Изменить
                 </button>
                 <button onClick={() => handleDelete(order._id)} className="text-red-500">
-                  Видалити
+                  Удалить
                 </button>
               </div>
             </div>
