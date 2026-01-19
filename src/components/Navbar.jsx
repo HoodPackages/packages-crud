@@ -31,6 +31,11 @@ export default function Navbar({ collapsed, setCollapsed }) {
                             {!collapsed && <span className="ml-2 text-sm font-medium">Товары</span>}
                         </Link>
 
+                        <Link className={linkClass} to="orders">
+                            <span>📋</span>
+                            {!collapsed && <span className="ml-2 text-sm font-medium">Заказы</span>}
+                        </Link>
+
                         <Link className={linkClass} to="import-products">
                             <span>⬆️</span>
                             {!collapsed && <span className="ml-2 text-sm font-medium">Загрузить из Excel</span>}
@@ -57,7 +62,7 @@ export default function Navbar({ collapsed, setCollapsed }) {
                         </Link>
                     </nav>
 
-                    <div className="mt-6">
+                    {/* <div className="mt-6">
                         {!collapsed && (
                             <h2 className="text-base font-semibold text-gray-800 dark:text-white">Дополнительно</h2>
                         )}
@@ -97,7 +102,7 @@ export default function Navbar({ collapsed, setCollapsed }) {
                                 )}
                             </a>
                         </nav>
-                    </div>
+                    </div> */}
                 </div>
             </aside>
         </>

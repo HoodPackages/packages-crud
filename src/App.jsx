@@ -7,6 +7,9 @@ import PrintPriceUploader from "./pages/PrintPriceUploader";
 import PatternManager from "./components/PatternManager";
 import SupportPage from "./pages/support/SupportPage";
 import SupportTicketPage from "./pages/support/SupportTicketPage";
+import OrdersListPage from "./pages/OrdersListPage";
+import OrderEditPage from "./pages/OrderEditPage";
+import OrderViewPage from "./pages/OrderViewPage";
 
 export default function App() {
   return (
@@ -19,6 +22,9 @@ export default function App() {
 
         <Route element={<Layout />}>
           <Route path="/products" element={<ProductManagerPage />} />
+          <Route path="/orders" element={<OrdersListPage />} />
+          <Route path="/orders/:id/edit" element={<OrderEditPage />} />
+          <Route path="/orders/:id" element={<OrderViewPage />} />
           <Route path="/import-products" element={<FileDropzone />} />
           <Route path="/pricing-price-uploader" element={<PrintPriceUploader />} />
           <Route path="/patterns-manage" element={<PatternManager />} />
