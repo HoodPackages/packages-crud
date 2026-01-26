@@ -50,7 +50,7 @@ export default function OrderViewPage() {
               <p><span className="font-semibold">Оплата:</span> {order.paymentMethod || "—"}</p>
               <p><span className="font-semibold">Статус:</span> <span className={`px-2 py-1 rounded-full text-white ${order.status === "new" ? "bg-yellow-500" : "bg-gray-500"}`}>{order.status}</span></p>
               <p><span className="font-semibold">Комментарий:</span> {order.comment || "—"}</p>
-              <p><span className="font-semibold">Язык: </span>{order.language || "-"}</p>
+              <p><span className="font-semibold">Язык:</span> {order.language || "-"}</p>
             </div>
           </div>
         </div>

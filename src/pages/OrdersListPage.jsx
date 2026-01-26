@@ -130,12 +130,12 @@ export default function OrdersListPage() {
                   </a>
                 )}
                 <button onClick={() => navigate(`/orders/${order._id}`)} className="text-blue-500">
-                  <Eye className="w-4 h-4" />
+                  <Eye className="w-4 h-4 cursor-pointer" />
                 </button>
-                <button onClick={() => navigate(`/orders/${order._id}/edit`)} className="text-yellow-500">
+                <button onClick={() => navigate(`/orders/${order._id}/edit`)} className="text-yellow-500 cursor-pointer">
                   Изменить
                 </button>
-                <button onClick={() => handleDelete(order._id)} className="text-red-500">
+                <button onClick={() => handleDelete(order._id)} className="text-red-500 cursor-pointer">
                   Удалить
                 </button>
               </div>

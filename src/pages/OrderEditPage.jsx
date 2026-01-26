@@ -13,6 +13,7 @@ export default function OrderEditPage() {
     const [status, setStatus] = useState("");
     const [comment, setComment] = useState("");
     const [paymentMethod, setPaymentMethod] = useState("");
+    const [language, setLanguage] = useState("");
     const [layoutFile, setLayoutFile] = useState(null);
 
     useEffect(() => {
@@ -22,10 +23,11 @@ export default function OrderEditPage() {
                 setOrder(data);
                 setContact(data.contact || {});
                 setDelivery(data.delivery || {});
-                setCart(data.cart || []);
-                setStatus(data.status || "new");
-                setComment(data.comment || "");
                 setPaymentMethod(data.paymentMethod || "");
+                setCart(data.cart || []);
+                setComment(data.comment || "");
+                setLanguage(data.language || "en");
+                setStatus(data.status || "new");
             });
     }, [id]);
 
@@ -39,18 +41,21 @@ export default function OrderEditPage() {
         const formData = new FormData();
         formData.append("contact", JSON.stringify(contact));
         formData.append("delivery", JSON.stringify(delivery));
-        formData.append("cart", JSON.stringify(cart));
-        formData.append("comment", comment);
         formData.append("paymentMethod", paymentMethod);
-        formData.append("status", status);
+        formData.append("comment", comment);
+        formData.append("language", language);
         if (layoutFile) formData.append("layout", layoutFile);
-
-        await fetch(`${API_URL}/api/orders/${id}`, {
-            method: "PUT",
-            body: formData,
-        });
-
-        navigate(`/orders/${id}`);
+        try {
+            await fetch(`${API_URL}/api/orders/${id}/edit`, {
+                method: "PUT",
+                body: formData,
+            });
+            alert("Заказ обновлён!");
+            navigate(`/orders`);
+        } catch (err) {
+            console.error(err);
+            alert("Ошибка при обновлении заказа");
+        }
     };
 
     const handleStatusChange = async (newStatus) => {
