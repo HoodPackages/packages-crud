@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { API_URL } from "../assets/config";
+import { link } from 'framer-motion/client';
 
 export default function Navbar({ collapsed, setCollapsed }) {
 
@@ -54,6 +55,11 @@ export default function Navbar({ collapsed, setCollapsed }) {
                         <Link className={linkClass} to="patterns-manage">
                             <span>📁</span>
                             {!collapsed && <span className="ml-2 text-sm font-medium">Шаблоны</span>}
+                        </Link>
+
+                        <Link className={linkClass} to="users">
+                            <span>👤</span>
+                            {!collapsed && <span className="ml-2 text-sm font-medium">Пользователи</span>}
                         </Link>
 
                         <Link className={linkClass} to="support">

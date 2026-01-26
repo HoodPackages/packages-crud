@@ -10,6 +10,8 @@ import SupportTicketPage from "./pages/support/SupportTicketPage";
 import OrdersListPage from "./pages/OrdersListPage";
 import OrderEditPage from "./pages/OrderEditPage";
 import OrderViewPage from "./pages/OrderViewPage";
+import UsersPage from "./pages/UsersPage";
+import UsersViewPage from "./pages/UsersViewPage";
 
 export default function App() {
   return (
@@ -28,6 +30,8 @@ export default function App() {
           <Route path="/import-products" element={<FileDropzone />} />
           <Route path="/pricing-price-uploader" element={<PrintPriceUploader />} />
           <Route path="/patterns-manage" element={<PatternManager />} />
+          <Route path="/users" element={<UsersPage />} />
+          <Route path="/users/:id" element={<UsersViewPage />} />
           <Route path="/support" element={<SupportPage />} />
           <Route path="/support/:ticketId" element={<SupportTicketPage />} />
         </Route>
